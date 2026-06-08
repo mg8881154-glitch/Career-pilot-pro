@@ -11,11 +11,21 @@ export const connectDB = async () => {
   const uri = mongoUri || 'mongodb://localhost:27017/careerpilot';
 
   console.log('📦 Connecting to MongoDB...');
-  await mongoose.connect(uri, {
-    serverSelectionTimeoutMS: 30000,
-    socketTimeoutMS: 45000,
-    maxPoolSize: 10,
-  });
+  try {
+    await mongoose.connect(uri, {
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 10000,
+      maxPoolSize: 10,
+    });
+  } catch (err) {
+    if (env === 'development') {
+      console.warn('⚠️  MongoDB connection failed (development mode) — DB-dependent features will be unavailable.');
+      console.warn('   To fix: Install MongoDB locally OR set a valid MONGODB_URI (e.g. MongoDB Atlas) in backend/.env');
+      console.warn('   MongoDB Atlas free tier: https://www.mongodb.com/atlas/database');
+      return; // Don't crash in development
+    }
+    throw err; // Re-throw in production
+  }
   console.log('📦 Connected to MongoDB');
 
   // Slow-query profiling is opt-in only. Set ENABLE_DB_PROFILING=true to activate.
