@@ -28,8 +28,12 @@ const tokenUsageSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+    index: true,
   },
 });
+
+tokenUsageSchema.index({ userId: 1, createdAt: -1 }, { background: true });
+tokenUsageSchema.index({ provider: 1, service: 1 }, { background: true });
 
 const TokenUsage = mongoose.model('TokenUsage', tokenUsageSchema);
 

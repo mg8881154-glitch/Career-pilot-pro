@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
-import dotenv from "dotenv";
-dotenv.config();
+import mongoose from 'mongoose';
 
 import { createServer } from 'http';
 import cors from 'cors';
@@ -331,6 +330,7 @@ startServer();
 // Graceful shutdown
 const shutdown = async (signal) => {
     console.log(`\n📥 Received ${signal}, shutting down gracefully...`);
+    await mongoose.connection.close();
     await redisManager.shutdown();
     console.log('👋 Server shutdown complete');
     process.exit(0);

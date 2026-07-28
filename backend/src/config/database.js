@@ -16,6 +16,7 @@ export const connectDB = async () => {
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 10000,
       maxPoolSize: 10,
+      bufferCommands: false,
     });
   } catch (err) {
     if (env === 'development') {
@@ -27,6 +28,14 @@ export const connectDB = async () => {
     throw err; // Re-throw in production
   }
   console.log('📦 Connected to MongoDB');
+
+  mongoose.connection.on('disconnected', () => {
+    console.warn('⚠️  MongoDB disconnected');
+  });
+
+  mongoose.connection.on('error', (err) => {
+    console.error('❌ MongoDB connection error:', err.message);
+  });
 
   // Slow-query profiling is opt-in only. Set ENABLE_DB_PROFILING=true to activate.
   const enableDbProfiling = process.env.ENABLE_DB_PROFILING === 'true';
