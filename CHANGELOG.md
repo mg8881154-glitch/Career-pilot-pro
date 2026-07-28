@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/mg8881154-glitch/Career-pilot-pro/compare/v1.0.0...v1.0.1) (2026-07-28)
+
+
+### Bug Fixes
+
+* resolve MongoDB issues across models and config ([c7234a6](https://github.com/mg8881154-glitch/Career-pilot-pro/commit/c7234a647d8e8b56cbfef90cc7abe6142ba1dda0))
+
 # 1.0.0 (2026-06-08)
 
 
