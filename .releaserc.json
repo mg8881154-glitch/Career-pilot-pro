@@ -9,7 +9,10 @@
     ["@semantic-release/github", {
       "successComment": false,
       "failComment": false,
-      "labels": false
+      "failTitle": false,
+      "labels": false,
+      "releasedLabels": false,
+      "addReleases": false
     }],
     ["@semantic-release/git", {
       "assets": ["CHANGELOG.md"],

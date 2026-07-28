@@ -8,6 +8,8 @@ on:
 permissions:
   contents: write
   packages: write
+  issues: read
+  pull-requests: read
 
 concurrency:
   group: release-${{ github.ref }}
@@ -36,6 +38,7 @@ jobs:
           extra_plugins: |
             @semantic-release/changelog
             @semantic-release/git
+            @semantic-release/github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
