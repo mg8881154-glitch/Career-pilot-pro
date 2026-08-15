@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/mg8881154-glitch/Career-pilot-pro/compare/v1.0.2...v1.0.3) (2026-08-15)
+
+
+### Bug Fixes
+
+* improve startup warnings and fix env var inconsistencies ([6d14114](https://github.com/mg8881154-glitch/Career-pilot-pro/commit/6d14114a6ceb2c67184b6f732605979a8a04377c))
+
 ## [1.0.2](https://github.com/mg8881154-glitch/Career-pilot-pro/compare/v1.0.1...v1.0.2) (2026-07-28)
 
 
