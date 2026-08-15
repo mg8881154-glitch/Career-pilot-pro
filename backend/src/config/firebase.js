@@ -68,25 +68,25 @@ if (serviceAccount) {
 }
 
 
-if (!initialized) {
-  // Check for GOOGLE_APPLICATION_CREDENTIALS environment variable
-  if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
-    try {
-      admin.initializeApp({
-        credential: admin.credential.applicationDefault(),
-        storageBucket: firebaseConfig.storageBucket
-      });
-      initialized = true;
-      console.log('✅ Firebase Admin SDK initialized with application default credentials');
-    } catch (error) {
-      console.warn('Failed to use application default credentials:', error.message);
-    }
+if (!initialized && process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+  // Only attempt application default credentials if the env var is explicitly set
+  try {
+    admin.initializeApp({
+      credential: admin.credential.applicationDefault(),
+      storageBucket: firebaseConfig.storageBucket
+    });
+    initialized = true;
+    console.log('✅ Firebase Admin SDK initialized with application default credentials');
+  } catch (error) {
+    console.warn('⚠️ Failed to use application default credentials:', error.message);
   }
 }
 
 if (!initialized) {
+  // No credentials provided — run in limited mode (auth/community features disabled)
+  console.warn('⚠️ Firebase initialized without credentials — running in limited/unauthenticated mode');
+  console.warn('   To enable Firebase features, set FIREBASE_SERVICE_ACCOUNT_PATH or FIREBASE_SERVICE_ACCOUNT in backend/.env');
   try {
-    console.warn('⚠️ Firebase initialized without credentials — running in limited/unauthenticated mode');
     admin.initializeApp({
       projectId: firebaseConfig.projectId,
       storageBucket: firebaseConfig.storageBucket
