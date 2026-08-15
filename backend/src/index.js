@@ -99,6 +99,21 @@ if (process.env.NODE_ENV === 'development') {
   if (!process.env.OPENAI_API_KEY) {
     console.warn('⚠️  OPENAI_API_KEY is not configured - OpenAI provider will not be available.');
   }
+
+  if (!process.env.RAPIDAPI_KEY) {
+    console.warn('⚠️  RAPIDAPI_KEY is not configured - job search will not work.');
+    console.warn('   Get a free key at https://rapidapi.com/letscrape-6bRBa3QguO5/api/jsearch');
+  }
+
+  if (!process.env.REDIS_URL) {
+    console.warn('⚠️  REDIS_URL is not configured - job queue, post scheduler and weekly digest will be disabled.');
+    console.warn('   Get a free Redis instance at https://app.redislabs.com');
+  }
+
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.warn('⚠️  EMAIL_USER / EMAIL_PASS not configured - email notifications will be disabled.');
+    console.warn('   Use a Gmail app password: https://myaccount.google.com/apppasswords');
+  }
 }
 
 // Validate and normalize CORS origin URLs

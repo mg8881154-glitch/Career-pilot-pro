@@ -8,11 +8,6 @@ dotenv.config();
 const RAPIDAPI_KEY = process.env.RAPIDAPI_KEY;
 const RAPIDAPI_HOST = process.env.RAPIDAPI_HOST || 'jsearch.p.rapidapi.com';
 
-// Check if API key is configured
-if (!RAPIDAPI_KEY) {
-    console.warn('⚠️  RAPIDAPI_KEY not configured - job search will not work');
-}
-
 // RapidAPI JSearch configuration
 const rapidApiClient = axios.create({
     baseURL: `https://${RAPIDAPI_HOST}`,
